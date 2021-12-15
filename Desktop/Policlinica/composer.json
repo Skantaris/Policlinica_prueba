@@ -1,0 +1,12 @@
+{
+    "name": "tomyzeng/policlinica",
+    "autoload": {
+        "psr-4": {
+            "Policlinica\\": "src/"
+        }
+    },
+    "require": {
+        "ext-mysqli": "*",
+        "phpmailer/phpmailer": "^6.5"
+    }
+}
