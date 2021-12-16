@@ -8,5 +8,5 @@
 /dataSources.local.xml
 # ignora todos los archivos del directorio MySQL/
 MySQL/
-# ignora todos los archivos del directorio app/vendor
-app/vendor/
+# ignora todos los archivos del directorio vendor
+vendor/

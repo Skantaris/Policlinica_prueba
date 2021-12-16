@@ -3,7 +3,9 @@
 use Policlinica\App;
 
 
-//require_once __DIR__ . "/../../vendor/autoload.php";
+require_once __DIR__ . '/App.php';
+
+require_once '../vendor/autoload.php';
 
 $app = new App(dirname(__DIR__));
 $app->router->addRouts("/","inicio");

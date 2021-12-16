@@ -2,7 +2,7 @@
     "name": "tomyzeng/policlinica",
     "autoload": {
         "psr-4": {
-            "Policlinica\\": "src/"
+            "Policlinica\\": "src"
         }
     },
     "require": {

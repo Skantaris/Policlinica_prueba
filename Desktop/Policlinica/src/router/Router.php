@@ -1,8 +1,10 @@
 <?php
 namespace Policlinica\router;
 
-use Policlinica\modelo\Modelo;
 use Policlinica\App;
+use Policlinica\modelo\Modelo;
+require __DIR__ . '/../modelo/Modelo.php';
+
 class Router{
     //Funcion para agregar ruta disponible para el usuario
     public array $routs = [];
@@ -13,6 +15,7 @@ class Router{
     public function result(){
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         $position = strpos($path, '?');
+        echo $path;
         if ($position){
             $path= substr($path, 0, $position);
         }
@@ -116,7 +119,7 @@ class Router{
         }
 
         ob_start();
-        include_once App::$DIR."/views/$pagina.php";
+        include_once App::$DIR."/html/views/$pagina.php";
         echo ob_get_clean();
     }
 }

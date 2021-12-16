@@ -1,12 +1,10 @@
 <?php
 namespace Policlinica\modelo;
 
-
 class Modelo{
 
     //Conectamos a la base de datos
     public  $connection ;
-
     public function __construct(){
         $this->connection = mysqli_connect('mysql', 'root', 'css', 'policlinica');
     }

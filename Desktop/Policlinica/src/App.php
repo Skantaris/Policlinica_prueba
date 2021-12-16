@@ -2,6 +2,7 @@
     namespace Policlinica;
 
     use Policlinica\router\Router;
+    require_once __DIR__ . '/router/Router.php';
     class App{
         public static string $DIR;
         public Router $router;
@@ -19,3 +20,5 @@
 
         
     }
+
+    
