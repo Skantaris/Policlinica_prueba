@@ -39,6 +39,7 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`Nombre_Admin`, `Contrasena`) VALUES
 ('admin', 'admin');
 
+
 -- --------------------------------------------------------
 
 --
