@@ -7,6 +7,7 @@ RUN apt-get install -y git unzip
 
 #Instalar módulos de pdo, pdo_mysql y mysqli
 RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN a2enmod rewrite
 
 #Instalar composer

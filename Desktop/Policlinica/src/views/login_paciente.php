@@ -35,9 +35,6 @@ if ($session == null || $session = ''){
         <ul class="nav nav-pills me-5">
             <li class="nav-item">
                 <a class="btn" href="/"> <h4>Cerrar Sesion</h4>
-                <?php
-                $modelo->CerrarSesion();
-                ?>
                 </a>
             </li>
             <li class="nav-item flex-wrap">

@@ -1,12 +1,14 @@
 <?php
 namespace Policlinica\modelo;
 
+
 class Modelo{
 
     //Conectamos a la base de datos
     public  $connection ;
+
     public function __construct(){
-        $this->connection = mysqli_connect('mysql', 'root', 'css', 'policlinica');
+        $this->connection = mysqli_connect("mysql", "root", "css", "policlinica");
     }
 
     //funciones de inicio
@@ -17,11 +19,7 @@ class Modelo{
             $nombre = $_POST ['nombre'];
             $apellido = $_POST ['apellido'];
             $contrasena = $_POST ['contrasena'];
-            $rcontrasena = $_POST['Rcontrasena'];
-            $dia = $_POST ['dia'];
-            $mes = $_POST ['mes'];
-            $anio = $_POST ['anio'];
-            $query="INSERT INTO usuarios(Cedula, Correo, Nombre, Apellido, Contrasena, Dia, Mes, Anio, Rol, Permisos) VALUES ('$cedula', '$correo', '$nombre', '$apellido', '$contrasena', '$dia', '$mes', '$anio', '2', 'admin')";
+            $query="INSERT INTO usuarios(Cedula, Correo, Nombre, Apellido, Contrasena, Rol, Permisos) VALUES ('$cedula', '$correo', '$nombre', '$apellido', '$contrasena', '2', 'admin')";
             $query2 = "INSERT INTO paciente (Cedula) VALUES ('$cedula')";
             $result = mysqli_query($this->connection,$query);
             $result2 = mysqli_query ($this->connection, $query2);
@@ -45,20 +43,21 @@ class Modelo{
     session_start();
     $_SESSION['cedula'] = $cedula;
 
+
     $query = "SELECT * FROM usuarios where Cedula = '$cedula' and Contrasena = '$contrasena'";
     $result = mysqli_query($this->connection, $query);
-
     $record = mysqli_fetch_array($result);
+    
 
     if ($record['Rol'] == 1){
-        header ("Location: admin");
+        header("Location: admin");
     }else if ($record['Rol'] == 2){
         header ("Location: paciente");
     } else if ($record['Rol'] == 3){
         header("Location: medico");
     } else{
         echo '<div class="alert alert-secondary" role="alert"> ';
-        echo 'Error, no ha creado una cuenta';
+        echo 'Los datos que se ingreso es invalido';
         echo '</div>';
     }
     mysqli_free_result($result);
@@ -67,12 +66,30 @@ class Modelo{
 
         }
 
-
-    public function CerrarSesion(){
-        session_start();
-        session_destroy();
-
+    public function listar(){
+        $this->clientes = $this->obtenerUsuarios();
+        return $this->clientes;
     }
+
+    public function obtenerUsuarios()
+    {
+        $query = "SELECT * FROM usuarios";
+        $result = mysqli_query($this->connection, $query);
+        while ($row = $result->fetch_assoc()) {
+            $clientes[] = $row;
+        }
+        return $clientes;
+    }
+
+    public function getCedula(){
+        $query = "SELECT Cedula FROM usuarios";
+        $result = mysqli_query($this->connection, $query);
+        while ($row = $result->fetch_assoc()) {
+            $cedula[] = $row;
+        }
+        return $cedula;
+    }
+
 
     public function MostrarCedula(){
         $query="SELECT * FROM usuarios WHERE Rol = '2'";
@@ -269,7 +286,7 @@ class Modelo{
                $to = $record2['Cedula' == $cedula];
                $subject ="Cita medica";
                $message = "Se creo su cita medica";
-               mail($to,$subject,$message);
+               //mail($to,$subject,$message);
                echo '<div class="alert alert-primary" role="alert"> ';
                echo 'Cita creada, revise su correo';
                echo '</div>';
@@ -327,35 +344,38 @@ class Modelo{
         }
     }
 
-    public function ReagendarCita(){
-        if (isset($_POST['submit'])){
+    public function ReagendarCita()
+    {
+        if (isset($_POST['submit'])) {
             $clinic = $_POST['clinic'];
             $especial = $_POST['espec'];
             $fecha = $_POST['fecha'];
             $hora = $_POST['tiempo'];
             $id = $_POST['id'];
-            $query="UPDATE citas SET clinica_name = '$clinic', Especialidad = '$especial', Fecha_asignada = '$fecha', Hora_asignada = '$hora' WHERE Codigo_cita = '$id' and clinica_labor = '$clinic'";
             $query2 = "SELECT ID_medico FROM medicos WHERE Especialidad = '$especial' and '$fecha' between fecha_desde and fecha_hasta and '$hora' between hora_desde and hora_hasta";
             $query3 = "SELECT usuarios.Correo FROM usuarios inner join citas ON usuarios.Cedula = citas.Cedula_usuario WHERE citas.Codigo_cita = '$id'";
-            $result = mysqli_query($this->connection, $query);
             $result2 = mysqli_query($this->connection, $query2);
             $result3 = mysqli_query($this->connection, $query3);
             $record = mysqli_fetch_array($result3);
-            if ($result and $result2 and $record){
+            $record3 = mysqli_fetch_array($result2);
+            if ($record3 and $record) {
+                $query = "UPDATE citas SET clinica_name = '$clinic', Especialidad = '$especial', Fecha_asignada = '$fecha' , Hora_asignada = '$hora' WHERE Codigo_cita = '$id' and clinica_name = '$clinic' ";
+                $result = mysqli_query($this->connection, $query);
                 $to = $record['Codigo_cita' == $id];
-                $subject ="Cita medica";
+                $subject = "Cita medica";
                 $message = "Se actualizo su cita";
-                mail($to,$subject,$message);
+                mail($to, $subject, $message);
                 echo '<div class="alert alert-primary" role="alert"> ';
                 echo 'Cita actualizada, revise su correo';
                 echo '</div>';
-            }else {
+            } else {
                 echo '<div class="alert alert-secondary" role="alert"> ';
                 echo 'Datos del medico erroneo, intente nuevamente';
                 echo '</div>';
             }
         }
     }
+
 
     public function CancelarCita(){
         if (isset($_POST['submit'])) {

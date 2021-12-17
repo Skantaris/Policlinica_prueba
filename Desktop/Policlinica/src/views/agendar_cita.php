@@ -20,9 +20,6 @@
         <ul class="nav nav-pills me-5">
             <li class="nav-item">
                 <a class="btn" href="/"> <h4>Cerrar Sesion</h4>
-                    <?php
-                    $modelo->CerrarSesion();
-                    ?>
                 </a>
             </li>
             <li class="nav-item flex-wrap">
@@ -52,7 +49,7 @@
         </div>
         <div class="pb-3">
             <p>Seleccione la especialidad que se desea consultar</p>
-            <select class="form-select" name="espec" id="espec" >
+            <select class="form-select" name="espec" id="espec">
                 <?php
                 $modelo->MostrarEspecialidad();
                 ?>
@@ -60,16 +57,16 @@
         </div>
         <div class="pb-3">
             <p>Seleccione la fecha deseada</p>
-            <input type="date" name="fecha" id="fecha">
+            <input type="date" name="fecha" id="fecha" required>
         </div>
         <div class="pb-3">
             <p>Seleccione la hora deseada</p>
-            <input type="time" name="tiempo" id="tiempo">
+            <input type="time" name="tiempo" id="tiempo" required>
         </div>
             <p>Ingrese su cedula</p>
             <div class="mb-3 row">
                 <label for="ced" class="form-label">Cédula</label>
-                <input type="text" class="form-control" name="ced" id="ced">
+                <input type="text" class="form-control" name="ced" id="ced" required>
             </div>
     </div>
     <div class="d-flex flex-row justify-content-end pb-5">

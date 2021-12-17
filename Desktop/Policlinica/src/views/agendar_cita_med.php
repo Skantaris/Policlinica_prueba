@@ -20,9 +20,6 @@
         <ul class="nav nav-pills me-5">
             <li class="nav-item">
                 <a class="btn" href="/"> <h4>Cerrar Sesion</h4>
-                    <?php
-                    $modelo->CerrarSesion();
-                    ?>
                 </a>
             </li>
             <li class="nav-item flex-wrap">
@@ -62,11 +59,11 @@
             </div>
             <div class="pb-3">
                 <p>Seleccione la fecha deseada</p>
-                <input type="date" name="fecha" id="fecha">
+                <input type="date" name="fecha" id="fecha" required>
             </div>
             <div class="pb-3">
                 <p>Seleccione la hora deseada</p>
-                <input type="time" name="tiempo" id="tiempo">
+                <input type="time" name="tiempo" id="tiempo" required>
             </div>
             <p>Ingrese cedula del paciente</p>
             <select name="ced" id="">

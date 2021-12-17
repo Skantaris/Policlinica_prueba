@@ -3,9 +3,8 @@
 use Policlinica\App;
 
 
-require_once __DIR__ . '/App.php';
-
-require_once '../vendor/autoload.php';
+require_once __DIR__ . '/App.php';  //llamamos al autoload y al archivo app
+require_once __DIR__ . '/vendor/autoload.php';
 
 $app = new App(dirname(__DIR__));
 $app->router->addRouts("/","inicio");
@@ -32,5 +31,5 @@ $app->router->addRouts("/home-med", "home_med");
 $app->router->addRouts("/reagendar-med", "reagendar_cita_med");
 
 
-$app->inicio();
+$app->inicio();     //llama la funcion inicio de app que contiene el result del path
 

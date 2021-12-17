@@ -39,9 +39,6 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="/">Cerrar Sesion
-                            <?php
-                            $modelo->CerrarSesion();
-                            ?>
                         </a>
                     </li>
                 </ul>

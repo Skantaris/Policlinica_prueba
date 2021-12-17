@@ -15,7 +15,6 @@ class Router{
     public function result(){
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         $position = strpos($path, '?');
-        echo $path;
         if ($position){
             $path= substr($path, 0, $position);
         }
@@ -33,7 +32,7 @@ class Router{
                     echo "no";
                 }*/
             }
-            if ($this->routs[$path] === 'nuevo-medico'){
+            if ($this->routs[$path] === 'nuevo-medico'){            //si el path es igual al siguiente, agrega la funcion del modelo
                 if (strtolower($_SERVER['REQUEST_METHOD']) === 'post'){
                     $modelo = new Modelo();
                     echo $modelo->AgregarMedico();
@@ -66,6 +65,7 @@ class Router{
                     error_reporting(0);
                     $modelo = new Modelo();
                     echo $modelo->IniciarSesion();
+
 
                 }
             }
@@ -106,20 +106,20 @@ class Router{
             }
 
 
-            $this->imprimir($pagina, $test);
+            $this->imprimir($pagina, $test);    
         } else {
             echo "Pagina no encontrada";
         }
     }
 
-    public function imprimir($pagina, array $variable = []){
+    public function imprimir($pagina, array $variable = []){       //funcion para guardar todas las paginas que se van agregando al addrouts
         foreach ($variable as $key => $value)
         {
             $$key = $value;
         }
 
         ob_start();
-        include_once App::$DIR."/html/views/$pagina.php";
+        include_once App::$DIR."/html/views/$pagina.php";       //seteamos el direccionamiento
         echo ob_get_clean();
     }
 }
