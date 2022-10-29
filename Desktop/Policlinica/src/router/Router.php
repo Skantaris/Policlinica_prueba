@@ -7,7 +7,7 @@ require __DIR__ . '/../modelo/Modelo.php';
 
 class Router{
     //Funcion para agregar ruta disponible para el usuario
-    public array $routs = [1];
+    public array $routs = [];
     public function addRouts(string $rout, string $view){
         $this->routs[$rout] = $view;
     }
